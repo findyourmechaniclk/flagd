@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "lint-pr.yaml"
+# Estimated savings: ~2 min/run
+#
 name: 'Lint PR'
 
 on:
@@ -8,6 +13,10 @@ on:
       - edited
       - synchronize
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   main:
     name: Validate PR title
